@@ -7,8 +7,7 @@ Welcome to awspycli's documentation!
 ====================================
  Awspycli is a client for aws client command with python, you could easy use aws client command. Thanks for checking it out.
 
-.. toctree::
-   :maxdepth: 2
+[emr](emr/index.md)
 
    emr/index
 
