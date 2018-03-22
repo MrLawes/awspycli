@@ -10,7 +10,7 @@ Welcome to awspycli's documentation!
 .. toctree::
    :maxdepth: 2
 
-   started/index
+   emr/index
 
 Indices and tables
 ==================
