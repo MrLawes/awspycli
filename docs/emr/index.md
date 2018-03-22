@@ -1,4 +1,9 @@
 # Available Commands
 
-### Application:
-    from xx import xxx
+### create-cluster:
+
+    import awspycli
+    awspycli.emr.create_cluster(
+        name='awspycli_test',
+    )
+    
