@@ -8,9 +8,8 @@ Welcome to awspycli's documentation!
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
 
-
+   started/index
 
 Indices and tables
 ==================
