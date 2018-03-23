@@ -80,5 +80,16 @@ class EMR(object):
         }])
         return self.exec_command('create-cluster', **kwargs)
 
+    def wait(self, status, **kwargs):
+        """ Wait until a particular condition is satisfied.
+        :param cluster_id:
+        :param status:
+            cluster-running
+            cluster-terminated
+            step-complete
+        :return:
+        """
+        return self.exec_command('wait ' + status, **kwargs)
+
 
 emr = EMR()

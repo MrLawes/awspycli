@@ -53,3 +53,15 @@
         steps=steps,
         instance_groups=instance_groups,
     ))
+
+### wait
+    """ Wait until a particular condition is satisfied.
+    :param cluster_id:
+    :param status:
+        cluster-running
+        cluster-terminated
+        step-complete
+    :return:
+    """
+    import awspycli
+    awspycli.emr.wait('cluster-running', 'j-3SD91U2E1L2QX')
