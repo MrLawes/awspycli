@@ -65,3 +65,11 @@
     """
     import awspycli
     awspycli.emr.wait('cluster-running', 'j-3SD91U2E1L2QX')
+
+### terminate_clusters
+    """ Shuts down one or more clusters, each specified by cluster ID
+    :param cluster_ids:
+    :return:
+    """
+    import awspycli
+    awspycli.emr.terminate_clusters(cluster_ids='j-3SD91U2E1L2QX')

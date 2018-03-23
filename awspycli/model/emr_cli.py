@@ -91,5 +91,12 @@ class EMR(object):
         """
         return self.exec_command('wait ' + status, **kwargs)
 
+    def terminate_clusters(self, cluster_ids):
+        """ Shuts down one or more clusters, each specified by cluster ID
+        :param cluster_ids:
+        :return:
+        """
+        return self.exec_command('terminate-clusters', **{'cluster_ids': cluster_ids})
+
 
 emr = EMR()
