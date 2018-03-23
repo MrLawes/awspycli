@@ -2,7 +2,6 @@
 
 import json
 import os
-import traceback
 
 
 class EMR(object):
@@ -41,6 +40,19 @@ class EMR(object):
             applications:
                 Args=string,string,string ...
                 default: Hadoop,Spark,Ganglia
+            ec2_attributes:
+                Args=json
+                    InstanceProfile:
+                        default: EMR_EC2_DefaultRole
+            service_role:
+                Args=string
+                default: EMR_DefaultRole
+            name:
+                Args=string
+                default: awspycli
+            region
+                Args=string
+                default: us-east-1
         :return:
             {u'ClusterId': u'j-1OAMNPOAHUIFP'}
         """
@@ -49,6 +61,23 @@ class EMR(object):
         ec2_attributes = kwargs['ec2_attributes']
         ec2_attributes.setdefault('InstanceProfile', 'EMR_EC2_DefaultRole')
         kwargs.setdefault('service_role', 'EMR_DefaultRole')
+        kwargs.setdefault('name', 'awspycli')
+        kwargs.setdefault('region', 'us-east-1')
+        kwargs.setdefault('instance_groups', {})
+        instance_groups = kwargs['instance_groups']
+        for instance_group in instance_groups:
+            instance_group.setdefault(
+                'Name', instance_group['InstanceGroupType'] + ' ' + instance_group['InstanceType'] + ' x '
+                        + str(instance_group['InstanceCount'])
+            )
+        kwargs.setdefault('steps', [{
+            'Name': 'awspycli default step',
+            'Args': ['sleep', '10'],
+            'Jar': 'command-runner.jar',
+            'ActionOnFailure': 'TERMINATE_CLUSTER',
+            'Type': 'CUSTOM_JAR',
+            'Properties': ''
+        }])
         return self.exec_command('create-cluster', **kwargs)
 
 

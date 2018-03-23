@@ -2,6 +2,10 @@ Welcome to awspycli's documentation!
 ====================================
  Awspycli is a client for aws client command with python, you could easy use aws client command. Thanks for checking it out.
 
+ Quick install guide
+===================
+    pip install awspycli
+
 ### Table Of Contents
   * [emr](emr/commands.md)
 
