@@ -2,7 +2,7 @@
 
    Documentation from aws emr cli reference: [https://docs.aws.amazon.com/cli/latest/reference/emr/](https://docs.aws.amazon.com/cli/latest/reference/emr/)
 
-### create-cluster:
+### create_cluster:
 
     """ Creates an Amazon EMR cluster with the specified configurations.
     :param kwargs:
