@@ -3,7 +3,7 @@
 from setuptools import setup
 from setuptools import find_packages
 
-VERSION = '1.0.0'
+VERSION = '1.0.1'
 
 setup(
     name='awspycli',
@@ -19,6 +19,7 @@ setup(
     include_package_data=True,
     zip_safe=True,
     install_requires=[
+        'awscli==1.14.63',
     ],
     version=VERSION,
 )
