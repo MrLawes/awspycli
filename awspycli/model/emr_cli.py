@@ -8,31 +8,16 @@ class EMR(object):
     def __init__(self):
         pass
 
-    def exec_command(self, command, **kwargs):
-        """ change kwargs to aws command, and run it
-        :param command:
+    def add_steps(self, **kwargs):
+        """ Add a list of steps to a cluster.
         :param kwargs:
+            cluster_id: string
+            steps: [
+                {},.....
+            ]
         :return:
         """
-        aws_command = 'aws emr {command} '.format(command=command)
-        l = []
-        kwargs_keys = kwargs.keys()
-        kwargs_keys.sort()
-        for k in kwargs_keys:
-            v = kwargs[k]
-            if isinstance(v, dict) or isinstance(v, list):
-                v = "' " + json.dumps(v) + " '"
-            if isinstance(v, bool):
-                v = ""
-            k = k.replace('_', '-')
-            l.append('--' + k + ' ' + v)
-        aws_command += ' '.join(l)
-        popen_result = os.popen(aws_command).readlines()
-        try:
-            popen_result = json.loads(''.join(popen_result))
-        except:
-            print(popen_result)
-        return popen_result
+        return self.exec_command('add-steps', **kwargs)
 
     def create_cluster(self, **kwargs):
         """ Creates an Amazon EMR cluster with the specified configurations.
@@ -80,6 +65,46 @@ class EMR(object):
         }])
         return self.exec_command('create-cluster', **kwargs)
 
+    def exec_command(self, command, **kwargs):
+        """ change kwargs to aws command, and run it
+        :param command:
+        :param kwargs:
+        :return:
+        """
+        aws_command = 'aws emr {command} '.format(command=command)
+        l = []
+        kwargs_keys = kwargs.keys()
+        kwargs_keys.sort()
+        for k in kwargs_keys:
+            v = kwargs[k]
+            if isinstance(v, dict) or isinstance(v, list):
+                v = "' " + json.dumps(v) + " '"
+            if isinstance(v, bool):
+                v = ""
+            k = k.replace('_', '-')
+            l.append('--' + k + ' ' + v)
+        aws_command += ' '.join(l)
+        popen_result = os.popen(aws_command).readlines()
+        try:
+            popen_result = json.loads(''.join(popen_result))
+        except:
+            print(popen_result)
+        return popen_result
+
+    def modify_cluster_attributes(self, **kwargs):
+        """ Modifies the cluster attributes 'visible-to-all-users' and 'termination-protected'.
+        :param kwargs:
+        :return:
+        """
+        return self.exec_command('modify-cluster-attributes', **kwargs)
+
+    def terminate_clusters(self, cluster_ids):
+        """ Shuts down one or more clusters, each specified by cluster ID
+        :param cluster_ids:
+        :return:
+        """
+        return self.exec_command('terminate-clusters', **{'cluster_ids': cluster_ids})
+
     def wait(self, status, **kwargs):
         """ Wait until a particular condition is satisfied.
         :param cluster_id:
@@ -90,13 +115,6 @@ class EMR(object):
         :return:
         """
         return self.exec_command('wait ' + status, **kwargs)
-
-    def terminate_clusters(self, cluster_ids):
-        """ Shuts down one or more clusters, each specified by cluster ID
-        :param cluster_ids:
-        :return:
-        """
-        return self.exec_command('terminate-clusters', **{'cluster_ids': cluster_ids})
 
 
 emr = EMR()

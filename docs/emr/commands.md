@@ -2,6 +2,29 @@
 
    Documentation from aws emr cli reference: [https://docs.aws.amazon.com/cli/latest/reference/emr/](https://docs.aws.amazon.com/cli/latest/reference/emr/)
 
+### add_steps
+    """ Add a list of steps to a cluster.
+    :param kwargs:
+        cluster_id: string
+        steps: [
+            {},.....
+        ]
+    :return:
+    """
+    import awspycli
+    steps = [{
+        'Name': 'awspycli default step',
+        'Args': ['sleep', '10'],
+        'Jar': 'command-runner.jar',
+        'ActionOnFailure': 'TERMINATE_CLUSTER',
+        'Type': 'CUSTOM_JAR',
+        'Properties': ''
+    }]
+    awspycli.emr.add_steps(
+        cluster_id='j-3SD91U2E1L2QX',
+        steps=steps,
+    ))
+        
 ### create_cluster:
 
     """ Creates an Amazon EMR cluster with the specified configurations.
@@ -54,6 +77,24 @@
         instance_groups=instance_groups,
     ))
 
+### modify_cluster_attributes
+    """ Modifies the cluster attributes 'visible-to-all-users' and 'termination-protected'.
+    :param kwargs:
+    :return:
+    """
+    import awspycli
+    awspycli.emr.modify_cluster_attributes(cluster_id='j-3SD91U2E1L2QX', no_termination_protected=True)
+
+        
+### terminate_clusters
+    """ Shuts down one or more clusters, each specified by cluster ID
+    :param cluster_ids:
+    :return:
+    """
+    import awspycli
+    awspycli.emr.terminate_clusters(cluster_ids='j-3SD91U2E1L2QX')
+
+
 ### wait
     """ Wait until a particular condition is satisfied.
     :param cluster_id:
@@ -66,10 +107,3 @@
     import awspycli
     awspycli.emr.wait('cluster-running', 'j-3SD91U2E1L2QX')
 
-### terminate_clusters
-    """ Shuts down one or more clusters, each specified by cluster ID
-    :param cluster_ids:
-    :return:
-    """
-    import awspycli
-    awspycli.emr.terminate_clusters(cluster_ids='j-3SD91U2E1L2QX')
