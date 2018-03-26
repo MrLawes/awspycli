@@ -79,8 +79,10 @@ class EMR(object):
             v = kwargs[k]
             if isinstance(v, dict) or isinstance(v, list):
                 v = "' " + json.dumps(v) + " '"
-            if isinstance(v, bool):
+            elif isinstance(v, bool):
                 v = ""
+            elif isinstance(v, int):
+                v = str(v)
             k = k.replace('_', '-')
             l.append('--' + k + ' ' + v)
         aws_command += ' '.join(l)
@@ -90,6 +92,13 @@ class EMR(object):
         except:
             print(popen_result)
         return popen_result
+
+    def list_steps(self, **kwargs):
+        """ Provides a list of steps for the cluster in reverse order unless you specify stepIds with the request.
+        :param kwargs:
+        :return:
+        """
+        return self.exec_command('list-steps', **kwargs)
 
     def modify_cluster_attributes(self, **kwargs):
         """ Modifies the cluster attributes 'visible-to-all-users' and 'termination-protected'.
@@ -115,6 +124,14 @@ class EMR(object):
         :return:
         """
         return self.exec_command('wait ' + status, **kwargs)
+
+    def wait_all_step_complete(self, cluster_id):
+        """ Wait until all step completed, insure do not add new step into cluster
+        :return:
+        """
+        list_step = self.list_steps(cluster_id=cluster_id, max_items= 1)
+        last_step_id = list_step['Steps'][0]['Id']
+        self.wait(status='step-complete', cluster_id=cluster_id, step_id=last_step_id)
 
 
 emr = EMR()

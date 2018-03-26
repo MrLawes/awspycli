@@ -77,6 +77,16 @@
         instance_groups=instance_groups,
     ))
 
+
+### list_steps
+    """ Provides a list of steps for the cluster in reverse order unless you specify stepIds with the request.
+    :param kwargs:
+    :return: 
+    """
+    import awspycli
+    awspycli.emr.list_steps(cluster_id='j-3SD91U2E1L2QX',max_items=1)
+
+
 ### modify_cluster_attributes
     """ Modifies the cluster attributes 'visible-to-all-users' and 'termination-protected'.
     :param kwargs:
@@ -107,3 +117,14 @@
     import awspycli
     awspycli.emr.wait('cluster-running', 'j-3SD91U2E1L2QX')
 
+### wait_all_step_complete
+<aside class="notice">
+insure do not add new step into cluster!
+</aside>
+
+    """ Wait until all step completed, insure do not add new step into cluster
+    :return:
+    """
+    import awspycli;awspycli
+    awspycli.emr.wait_all_step_complete(cluster_id='j-3SD91U2E1L2QX')
+    
