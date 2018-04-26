@@ -95,6 +95,12 @@
     import awspycli
     awspycli.emr.modify_cluster_attributes(cluster_id='j-3SD91U2E1L2QX', no_termination_protected=True)
 
+### schedule_hbase_backup
+    """  Adds a step to schedule automated HBase backup. This command is only available when using Amazon EMR versionsearlier than 4.0.
+    """
+    import awspycli
+    awspycli.emr.schedule_hbase_backup(cluster_id='j-2S2NT3ICXM0CC', type ='full',)
+
 ### socks
     """ Create a socks tunnel on port 8157 from your machine to the master.
     :param cluster_id:

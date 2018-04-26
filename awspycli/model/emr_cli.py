@@ -107,6 +107,11 @@ class EMR(object):
         """
         return self.exec_command('modify-cluster-attributes', **kwargs)
 
+    def schedule_hbase_backup(self, **kwargs):
+        """  Adds a step to schedule automated HBase backup. This command is only available when using Amazon EMR versionsearlier than 4.0.
+        """
+        return self.exec_command('schedule-hbase-backup ', **kwargs)
+
     def socks(self, cluster_id, key_pair_file):
         """ Create a socks tunnel on port 8157 from your machine to the master.
         :param cluster_id:
