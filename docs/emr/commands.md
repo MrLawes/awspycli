@@ -95,6 +95,15 @@
     import awspycli
     awspycli.emr.modify_cluster_attributes(cluster_id='j-3SD91U2E1L2QX', no_termination_protected=True)
 
+### socks
+    """ Create a socks tunnel on port 8157 from your machine to the master.
+    :param cluster_id:
+    :param key_pair_file:
+    :return:
+    """
+    import awspycli
+    awspycli.emr.socks(cluster_id='j-2S2NT3ICXM0CC', key_pair_file='~/emr.pem',)
+    
 ### ssh
     """
     SSH into master node of the cluster.

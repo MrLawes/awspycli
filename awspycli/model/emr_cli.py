@@ -107,6 +107,16 @@ class EMR(object):
         """
         return self.exec_command('modify-cluster-attributes', **kwargs)
 
+    def socks(self, cluster_id, key_pair_file):
+        """ Create a socks tunnel on port 8157 from your machine to the master.
+        :param cluster_id:
+        :param key_pair_file:
+        :return:
+        """
+        return self.exec_command(
+            'socks', **{'cluster_id': cluster_id, 'key_pair_file': key_pair_file}
+        )
+
     def ssh(self, cluster_id, key_pair_file, command):
         """
         SSH into master node of the cluster.
