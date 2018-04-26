@@ -114,3 +114,12 @@
     import awspycli
     awspycli.s3.rm(s3uri='s3://shinezone-architecture/test/test.py')
 
+### sync
+    """ Syncs directories and S3 prefixes.
+    Recursively copies new and updated files from the source directory to the destination.
+    Only creates folders in the destination if they contain one or more files.
+    """
+    import awspycli
+    a = awspycli.s3.sync(sync_from='/tmp/test/', sync_to='s3://shinezone-architecture/test/yourtest/', delete=True)
+
+

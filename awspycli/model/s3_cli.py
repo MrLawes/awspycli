@@ -98,5 +98,15 @@ class S3(object):
         """
         return self.exec_command('rm %s' % (s3uri), **kwargs)
 
+    def sync(self, sync_from, sync_to, **kwargs):
+        """ Syncs directories and S3 prefixes.
+        Recursively copies new and updated files from the source directory to the destination.
+        Only creates folders in the destination if they contain one or more files.
+        :param sync_from:
+        :param sync_from:
+        :param kwargs:      https://docs.aws.amazon.com/cli/latest/reference/s3/sync.html
+        """
+        return self.exec_command('sync %s %s' % (sync_from, sync_to), **kwargs)
+
 
 s3 = S3()
