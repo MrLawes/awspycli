@@ -65,13 +65,13 @@ class EMR(object):
         }])
         return self.exec_command('create-cluster', **kwargs)
 
-    def exec_command(self, command, **kwargs):
+    def exec_command(self, emr_command, **kwargs):
         """ change kwargs to aws command, and run it
         :param command:
         :param kwargs:
         :return:
         """
-        aws_command = 'aws emr {command} '.format(command=command)
+        aws_command = 'aws emr {command} '.format(command=emr_command)
         l = []
         kwargs_keys = kwargs.keys()
         kwargs_keys.sort()
@@ -107,6 +107,20 @@ class EMR(object):
         """
         return self.exec_command('modify-cluster-attributes', **kwargs)
 
+    def ssh(self, cluster_id, key_pair_file, command):
+        """
+        SSH into master node of the cluster.
+        :param cluster_ids:     (string) Cluster Id of cluster you want to ssh into
+        :param key_pair_file:   (string) Private key file to use for login
+        :param command:         Command to execute on Master Node
+        :return:                list. The result
+        """
+        ssh_result = self.exec_command(
+            'ssh', **{'cluster_id': cluster_id, 'key_pair_file': key_pair_file, 'command': '"' + command + '"'}
+        )
+        ssh_result.pop()
+        return ssh_result
+
     def terminate_clusters(self, cluster_ids):
         """ Shuts down one or more clusters, each specified by cluster ID
         :param cluster_ids:
@@ -129,7 +143,7 @@ class EMR(object):
         """ Wait until all step completed, insure do not add new step into cluster
         :return:
         """
-        list_step = self.list_steps(cluster_id=cluster_id, max_items= 1)
+        list_step = self.list_steps(cluster_id=cluster_id, max_items=1)
         last_step_id = list_step['Steps'][0]['Id']
         self.wait(status='step-complete', cluster_id=cluster_id, step_id=last_step_id)
 

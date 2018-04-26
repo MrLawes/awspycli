@@ -95,6 +95,20 @@
     import awspycli
     awspycli.emr.modify_cluster_attributes(cluster_id='j-3SD91U2E1L2QX', no_termination_protected=True)
 
+### ssh
+    """
+    SSH into master node of the cluster.
+    :param cluster_ids:     (string) Cluster Id of cluster you want to ssh into
+    :param key_pair_file:   (string) Private key file to use for login
+    :param command:         Command to execute on Master Node
+    :return:                list. The result
+    """
+    import awspycli
+    awspycli.emr.ssh(
+        cluster_id='j-2S2NT3ICXM0CC', key_pair_file='~/emr.pem', command='ls /home/hadoop/'
+    )
+    >>> ['a.log  b.log']
+
         
 ### terminate_clusters
     """ Shuts down one or more clusters, each specified by cluster ID
