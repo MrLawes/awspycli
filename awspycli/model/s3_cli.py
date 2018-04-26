@@ -14,7 +14,7 @@ class S3(object):
         :param kwargs:
         :return:
         """
-        aws_command = 'aws emr {command} '.format(command=emr_command)
+        aws_command = 'aws s3 {command} '.format(command=emr_command)
         l = []
         kwargs_keys = kwargs.keys()
         kwargs_keys.sort()
@@ -37,6 +37,12 @@ class S3(object):
         return popen_result
 
     def cp(self, copy_from, copy_to, **kwargs):
+        """ Copies a local file or S3 object to another location locally or in S3.
+        :param copy_from:
+        :param copy_to:
+        :param kwargs:      https://docs.aws.amazon.com/cli/latest/reference/s3/cp.html
+        :return:
+        """
         return self.exec_command('cp %s %s' % (copy_from, copy_to), **kwargs)
 
 s3 = S3()
