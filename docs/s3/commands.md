@@ -92,4 +92,25 @@
     :return:
     """
     import awspycli
-    awspycli.presign(s3uri='s3://shinezone-architecture/test/test.py')
+    awspycli.s3.presign(s3uri='s3://shinezone-architecture/test/test.py')
+
+### rb
+    """ Deletes an empty S3 bucket.
+    A bucket must be completely empty of objects and versioned objects before it can be deleted.
+    However, the --force parameter can be used to delete the non-versioned objects in the bucket before the bucket is deleted.
+    :param s3uri:       path (string), startswith s3://
+    :param kwargs:      https://docs.aws.amazon.com/cli/latest/reference/s3/rb.html
+    :return:
+    """
+    import awspycli
+    awspycli.s3.rb(s3uri='s3://awspyclimakebucket')
+
+### rm
+    """ Deletes an S3 object.
+    :param s3uri:       path (string), startswith s3://
+    :param kwargs:      https://docs.aws.amazon.com/cli/latest/reference/s3/rm.html
+    :return:
+    """
+    import awspycli
+    awspycli.s3.rm(s3uri='s3://shinezone-architecture/test/test.py')
+

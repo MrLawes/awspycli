@@ -80,4 +80,23 @@ class S3(object):
         """
         return self.exec_command('presign %s' % (s3uri), **kwargs)[0].strip()
 
+    def rb(self, s3uri, **kwargs):
+        """ Deletes an empty S3 bucket.
+        A bucket must be completely empty of objects and versioned objects before it can be deleted.
+        However, the --force parameter can be used to delete the non-versioned objects in the bucket before the bucket is deleted.
+        :param s3uri:       path (string), startswith s3://
+        :param kwargs:      https://docs.aws.amazon.com/cli/latest/reference/s3/rb.html
+        :return:
+        """
+        return self.exec_command('rb %s' % (s3uri), **kwargs)
+
+    def rm(self, s3uri, **kwargs):
+        """ Deletes an S3 object.
+        :param s3uri:       path (string), startswith s3://
+        :param kwargs:      https://docs.aws.amazon.com/cli/latest/reference/s3/rm.html
+        :return:
+        """
+        return self.exec_command('rm %s' % (s3uri), **kwargs)
+
+
 s3 = S3()
