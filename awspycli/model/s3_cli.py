@@ -16,7 +16,7 @@ class S3(object):
         """
         aws_command = 'aws s3 {command} '.format(command=emr_command)
         l = []
-        kwargs_keys = kwargs.keys()
+        kwargs_keys = list(kwargs.keys())
         kwargs_keys.sort()
         for k in kwargs_keys:
             v = kwargs[k]

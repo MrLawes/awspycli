@@ -44,6 +44,7 @@
         [expected_size <value>]
         [recursive]
     """
+      
     import awspycli
     awspycli.s3.cp(copy_from='/tmp/test.py', copy_to='s3://shinezone-architecture/test/test.py', quiet=True)
 
@@ -61,6 +62,7 @@
         [summarize]
         [request_payer <value>]
     """
+      
     import awspycli
     awspycli.s3.ls(s3uri='s3://shinezone-architecture/test/',human_readable=True)
 
@@ -70,6 +72,7 @@
     :param kwargs:
     :return:
     """
+      
     import awspycli
     awspycli.s3.mb(s3uri='s3://awspyclimakebucket',)
 
@@ -80,6 +83,7 @@
     :param kwargs:      https://docs.aws.amazon.com/cli/latest/reference/s3/mv.html
     :return:
     """
+      
     import awspycli
     awspycli.s3.mv(mv_from='s3://shinezone-architecture/test/test.py', mv_to='s3://shinezone-architecture/test/test_mv.py', quiet=True)
 
@@ -91,6 +95,7 @@
     :param kwargs:      https://docs.aws.amazon.com/cli/latest/reference/s3/presign.html
     :return:
     """
+      
     import awspycli
     awspycli.s3.presign(s3uri='s3://shinezone-architecture/test/test.py')
 
@@ -102,6 +107,7 @@
     :param kwargs:      https://docs.aws.amazon.com/cli/latest/reference/s3/rb.html
     :return:
     """
+      
     import awspycli
     awspycli.s3.rb(s3uri='s3://awspyclimakebucket')
 
@@ -111,6 +117,7 @@
     :param kwargs:      https://docs.aws.amazon.com/cli/latest/reference/s3/rm.html
     :return:
     """
+      
     import awspycli
     awspycli.s3.rm(s3uri='s3://shinezone-architecture/test/test.py')
 
@@ -119,6 +126,7 @@
     Recursively copies new and updated files from the source directory to the destination.
     Only creates folders in the destination if they contain one or more files.
     """
+      
     import awspycli
     a = awspycli.s3.sync(sync_from='/tmp/test/', sync_to='s3://shinezone-architecture/test/yourtest/', delete=True)
 
@@ -126,6 +134,7 @@
     """ Set the website configuration for a bucket.
     :param s3uri:       path (string), startswith s3://
     """
+      
     import awspycli
     awspycli.s3.website(s3uri='s3://shinezone-architecture/')
 
