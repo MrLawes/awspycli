@@ -122,4 +122,10 @@
     import awspycli
     a = awspycli.s3.sync(sync_from='/tmp/test/', sync_to='s3://shinezone-architecture/test/yourtest/', delete=True)
 
+### sync
+    """ Set the website configuration for a bucket.
+    :param s3uri:       path (string), startswith s3://
+    """
+    import awspycli
+    awspycli.s3.website(s3uri='s3://shinezone-architecture/')
 

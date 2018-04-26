@@ -108,5 +108,13 @@ class S3(object):
         """
         return self.exec_command('sync %s %s' % (sync_from, sync_to), **kwargs)
 
+    def website(self, s3uri, index_document='index.html', error_document='error.html'):
+        """ Set the website configuration for a bucket.
+        :param s3uri:       path (string), startswith s3://
+        """
+        return self.exec_command(
+            'website %s' % (s3uri,), **{'index_document': index_document, 'error_document': error_document}
+        )
+
 
 s3 = S3()
