@@ -19,4 +19,4 @@ and place it in ~/.aws/credentials
 Table Of Contents
 ===================
   * [emr](emr/commands.md)
-
+  * [s3](s3/commands.md)
