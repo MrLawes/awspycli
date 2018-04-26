@@ -53,5 +53,31 @@ class S3(object):
         """
         return self.exec_command('ls %s' % (s3uri,), **kwargs)
 
+    def mb(self, s3uri, **kwargs):
+        """ Creates an S3 bucket.
+        :param s3uri:       path (string), startswith s3://
+        :param kwargs:
+        :return:
+        """
+        return self.exec_command('mb %s' % (s3uri,), **kwargs)
+
+    def mv(self, mv_from, mv_to, **kwargs):
+        """ Moves a local file or S3 object to another location locally or in S3.
+        :param mv_from:
+        :param mv_to:
+        :param kwargs:      https://docs.aws.amazon.com/cli/latest/reference/s3/mv.html
+        :return:
+        """
+        return self.exec_command('mv %s %s' % (mv_from, mv_to), **kwargs)
+
+    def presign(self, s3uri, **kwargs):
+        """ Generate a pre-signed URL for an Amazon S3 object.
+        This allows anyone who receives the pre-signed URL to retrieve the S3 object with an HTTP GET request.
+        For sigv4 requests the region needs to be configured explicitly.
+        :param s3uri:       path (string), startswith s3://
+        :param kwargs:      https://docs.aws.amazon.com/cli/latest/reference/s3/presign.html
+        :return:
+        """
+        return self.exec_command('presign %s' % (s3uri), **kwargs)[0].strip()
 
 s3 = S3()

@@ -49,7 +49,7 @@
 
 ### ls
      """ List S3 objects and common prefixes under a prefix or all S3 buckets. Note that the --output and --no-paginate arguments are ignored for this command.
-    :param s3uri:
+    :param s3uri:       path (string), startswith s3://
     :param kwargs:      https://docs.aws.amazon.com/cli/latest/reference/s3/ls.html
     :return:
      ls:
@@ -64,4 +64,32 @@
     import awspycli
     awspycli.s3.ls(s3uri='s3://shinezone-architecture/test/',human_readable=True)
 
+### mb
+    """ Creates an S3 bucket.
+    :param s3uri:       path (string), startswith s3://
+    :param kwargs:
+    :return:
+    """
+    import awspycli
+    awspycli.s3.mb(s3uri='s3://awspyclimakebucket',)
 
+### mv
+    """ Moves a local file or S3 object to another location locally or in S3.
+    :param mv_from:
+    :param mv_to:
+    :param kwargs:      https://docs.aws.amazon.com/cli/latest/reference/s3/mv.html
+    :return:
+    """
+    import awspycli
+    awspycli.s3.mv(mv_from='s3://shinezone-architecture/test/test.py', mv_to='s3://shinezone-architecture/test/test_mv.py', quiet=True)
+
+### presign
+    """ Generate a pre-signed URL for an Amazon S3 object.
+    This allows anyone who receives the pre-signed URL to retrieve the S3 object with an HTTP GET request.
+    For sigv4 requests the region needs to be configured explicitly.
+    :param s3uri:       path (string), startswith s3://
+    :param kwargs:      https://docs.aws.amazon.com/cli/latest/reference/s3/presign.html
+    :return:
+    """
+    import awspycli
+    awspycli.presign(s3uri='s3://shinezone-architecture/test/test.py')
