@@ -7,9 +7,61 @@
     :param copy_from: 
     :param copy_to:
     :param kwargs:      https://docs.aws.amazon.com/cli/latest/reference/s3/cp.html
-    :return:
+    cp:
+        <LocalPath> <S3Uri> or <S3Uri> <LocalPath> or <S3Uri> <S3Uri>
+    kwargs:
+        [dryrun]
+        [quiet]
+        [include <value>]
+        [exclude <value>]
+        [acl <value>]
+        [follow_symlinks | no_follow_symlinks]
+        [no_guess_mime_type]
+        [sse <value>]
+        [sse_c <value>]
+        [sse_c_key <value>]
+        [sse_kms_key_id <value>]
+        [sse_c_copy_source <value>]
+        [sse_c_copy_source_key <value>]
+        [storage_class <value>]
+        [grants <value> [<value>...]]
+        [website_redirect <value>]
+        [content_type <value>]
+        [cache_control <value>]
+        [content_disposition <value>]
+        [content_encoding <value>]
+        [content_language <value>]
+        [expires <value>]
+        [source_region <value>]
+        [only_show_errors]
+        [no_progress]
+        [page_size <value>]
+        [ignore_glacier_warnings]
+        [force_glacier_transfer]
+        [request_payer <value>]
+        [metadata <value>]
+        [metadata_directive <value>]
+        [expected_size <value>]
+        [recursive]
     """
     import awspycli
-    awspycli.s3.cp(copy_from='/tmp/chenhaiou/test.py', copy_to='s3://shinezone-architecture/test/chenhaiou/test.py', quiet=True)
+    awspycli.s3.cp(copy_from='/tmp/test.py', copy_to='s3://shinezone-architecture/test/test.py', quiet=True)
 
-    
+### ls
+     """ List S3 objects and common prefixes under a prefix or all S3 buckets. Note that the --output and --no-paginate arguments are ignored for this command.
+    :param s3uri:
+    :param kwargs:      https://docs.aws.amazon.com/cli/latest/reference/s3/ls.html
+    :return:
+     ls:
+        <S3Uri> or NONE
+    kwargs:
+        [recursive]
+        [page_size <value>]
+        [human_readable]
+        [summarize]
+        [request_payer <value>]
+    """
+    import awspycli
+    awspycli.s3.ls(s3uri='s3://shinezone-architecture/test/',human_readable=True)
+
+

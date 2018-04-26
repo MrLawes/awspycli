@@ -45,4 +45,13 @@ class S3(object):
         """
         return self.exec_command('cp %s %s' % (copy_from, copy_to), **kwargs)
 
+    def ls(self, s3uri, **kwargs):
+        """ List S3 objects and common prefixes under a prefix or all S3 buckets. Note that the --output and --no-paginate arguments are ignored for this command.
+        :param s3uri:
+        :param kwargs:      https://docs.aws.amazon.com/cli/latest/reference/s3/ls.html
+        :return:
+        """
+        return self.exec_command('ls %s' % (s3uri,), **kwargs)
+
+
 s3 = S3()
